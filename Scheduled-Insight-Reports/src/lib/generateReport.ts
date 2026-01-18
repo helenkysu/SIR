@@ -1,6 +1,6 @@
 import { dbClient , saveError} from './database'
 import { emailService } from '@/lib/email';
-import { calculateNextRunAt } from '../lib/utils'
+import { calculateNextRunAt } from './utils'
 export async function generateReport(reportId: number, config: any, isScheduledRun: boolean) {
     try {
       // Mark report as running
