@@ -1,0 +1,10 @@
+name: Minute Trigger
+on:
+  schedule:
+    - cron: '* * * * *' # trigger generate report every minute
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping API
+        run: curl https://sir-5wlpirgr6-helens-projects-9ff7fb32.vercel.app/api/cron
