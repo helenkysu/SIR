@@ -64,17 +64,6 @@ export async function initializeDatabase() {
       )
     `);
 
-    await run(`
-      CREATE TABLE IF NOT EXISTS scheduled_reports (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        config_id INTEGER NOT NULL,
-        next_run_at DATETIME NOT NULL,
-        is_active BOOLEAN DEFAULT 1,
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (config_id) REFERENCES report_configs (id)
-      )
-    `);
-
     console.log("Turso database initialized successfully");
   } catch (error) {
     console.error("Turso database initialization failed:", error);
