@@ -1,5 +1,5 @@
-import { dbClient, saveError } from "../../lib/database";
-import { generateReport } from "../../lib/generateReport";
+import { dbClient, saveError } from "../../../lib/database";
+import { generateReport } from "../../../lib/generateReport";
 
 export async function GET() {
   console.log("checking for reports to generate")
