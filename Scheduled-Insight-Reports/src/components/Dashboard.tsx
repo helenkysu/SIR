@@ -203,7 +203,7 @@ export default function Dashboard() {
         </TabsContent>
 
         <TabsContent value="create">
-          <ReportConfigForm />
+          <ReportConfigForm fetchData={fetchData} />
         </TabsContent>
       </Tabs>
     </div>

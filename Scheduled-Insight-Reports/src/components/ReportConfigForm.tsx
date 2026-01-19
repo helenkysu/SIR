@@ -18,7 +18,12 @@ const DATE_RANGE_ENUM_OPTIONS = ["last7","last14","last30"];
 const CADENCE_OPTIONS = ["manual","hourly","every 12 hours","daily"];
 const DELIVERY_OPTIONS = ["email","link"];
 
-export function ReportConfigForm() {
+
+interface ReportConfigFormProps {
+  fetchData: () => void; //refresh configs in UI
+}
+
+export function ReportConfigForm(props:ReportConfigFormProps ) {
   const [platform, setPlatform] = useState<"meta" | "tiktok">("meta");
   const [metrics, setMetrics] = useState<string[]>([]);
   const [level, setLevel] = useState<string>(META_LEVELS[0]);
@@ -34,21 +39,6 @@ export function ReportConfigForm() {
     setMetrics(prev => prev.includes(m) ? prev.filter(x => x !== m) : [...prev, m]);
   };
 
-  const handleCreateConfig = async (configData: ReportConfigFormData) => {
-    try {
-      const response = await fetch('/api/configs', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(configData)
-      });
-
-      if (response.ok) {
-        // await fetchData();
-      }
-    } catch (error) {
-      console.error('Error creating config:', error);
-    }
-  };
 
 const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
@@ -96,6 +86,7 @@ const handleSubmit = async (e: React.FormEvent) => {
 
     if (response.ok) {
       alert(`${platform} report config created successfully!`);
+      props.fetchData();
     } else {
       const text = await response.text();
       console.error("API error:", text);
